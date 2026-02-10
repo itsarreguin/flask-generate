@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.py]
+line_lenght = 120
+indent_style = space
+indent_size = 4
+insert_final_newline = false
+
+[*.{html,html.jinja}]
+indent_style = space
+indent_size = 2
+insert_final_newline = false
+
+[*.txt]
+insert_final_newline = false
+
+[*.{md,yml}]
+insert_final_newline = true
