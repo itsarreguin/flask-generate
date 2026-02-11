@@ -1,1 +1,1 @@
-from {{ app_name }}.settings.common import *
+from {{ app_name.lower() }}.settings.base import *

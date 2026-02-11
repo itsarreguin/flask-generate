@@ -1,9 +1,9 @@
 [project]
 name = "Flask-Generate"
 version = "0.1.0"
-description = "Flask"
+description = "Scaffold generator for Flask apps."
 authors = [
-    {name = "Brandon Arreguin", email = "arreguin.tech@gmail.com"}
+    { name = "Brandon Arreguin", email = "arreguin.tech@gmail.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.10"
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "flask_generate", from = "src"}]
+packages = [{ include = "flask_generate", from = "src" }]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
