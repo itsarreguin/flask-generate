@@ -1,0 +1,17 @@
+import os
+
+from pathlib import Path
+from dotenv import load_dotenv
+
+
+APP_DIR = Path(__file__).resolve().parent.parent
+
+BASE_DIR = APP_DIR.parent
+
+load_dotenv(BASE_DIR, '.env')
+
+
+SECRET_KEY = '{{ SECRET_KEY }}'
+
+
+GENERATE_APP_TYPE = '{{ APP_TYPE }}'

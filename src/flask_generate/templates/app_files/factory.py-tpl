@@ -1,0 +1,18 @@
+from flask import Flask
+from flask_generate import blueprint
+
+from {{ app_name }}.extensions import register_extensions
+
+
+def register_blueprints(app: Flask) -> None:
+    app.register_blueprint(blueprint)
+
+
+def create_app(settings: str) -> Flask:
+    app = Flask(__name__)
+    app.config.from_object(settings)
+
+    register_extensions(app)
+    register_blueprints(app)
+
+    return app
