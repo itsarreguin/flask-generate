@@ -15,6 +15,9 @@ dependencies = [
 [tool.poetry]
 packages = [{ include = "flask_generate", from = "src" }]
 
+[project.scripts]
+flask-generate = "flask_generate.management.project:execute_cli"
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
