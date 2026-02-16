@@ -1,0 +1,11 @@
+from {{ app_name }}.extensions import db
+from sqlalchemy.orm import Mapped, mapped_column
+
+
+class {{ model_name }}(db.Model):
+
+    __tablename__: str = '{{ model_name.lower() }}'
+
+    {% for field, type in fields %}
+        {{ field.lower }}: Mapped[{{ type }}] = mapped_column()
+    {% endfor %}

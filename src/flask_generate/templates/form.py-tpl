@@ -1,0 +1,6 @@
+from flask_wtf import FlaskForm
+from wtforms import fields, widgets
+
+
+class {{ form_name }}Form(FlaskForm):
+    submit = fields.SubmitField('submit')

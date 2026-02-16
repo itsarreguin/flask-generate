@@ -1,0 +1,25 @@
+from flask import Blueprint, request, render_template
+from flask.wrappers import Response
+
+
+path = Blueprint('{{ name.lower() }}', __name__)
+
+
+@path.route('/')
+def index() -> Response:
+    pass
+
+
+@path.route('/create/')
+def create() -> Response:
+    pass
+
+
+@path.route('/<int:id>/update/')
+def update(id: int) -> Response:
+    pass
+
+
+@path.route('/<int:id>/delete/')
+def delete(id: int) -> Response:
+    pass
