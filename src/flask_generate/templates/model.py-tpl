@@ -1,5 +1,6 @@
-from {{ app_name }}.extensions import db
 from sqlalchemy.orm import Mapped, mapped_column
+
+from {{ app_name }}.extensions import db
 
 
 class {{ model_name }}(db.Model):

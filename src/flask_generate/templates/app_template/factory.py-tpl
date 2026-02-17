@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_generate import blueprint
 
-from {{ app_name.lower() }}.extensions import register_extensions
+from {{ app_name }}.extensions import register_extensions
 
 
 def register_blueprints(app: Flask) -> None:
-    app.register_blueprint(blueprint)
+    app.register_blueprint(blueprint.path)
 
 
 def create_app(settings: str) -> Flask:

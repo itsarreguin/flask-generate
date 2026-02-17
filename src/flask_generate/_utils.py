@@ -17,7 +17,7 @@ def _create_app_file(app_name: str, root: str, file: str, dest: str, **context: 
     with open(file_path, encoding='utf-8') as template_file:
         template_content = template_file.read()
 
-    context.update({ 'app_name': app_name })
+    context.update({ 'app_name': app_name.lower() })
     template_string = render_string(template_content, **context)
 
     new_file = file.replace(extension, new_extension)

@@ -13,3 +13,6 @@ SECRET_KEY = '{{ secret_key }}'
 
 GENERATE_APP_STRUCTURE_TYPE = '{{ app_type }}'
 GENERATE_ORM = '{{ orm }}'
+
+
+SQLALCHEMY_DATABASE_URI='sqlite:///db.sqlite3'
