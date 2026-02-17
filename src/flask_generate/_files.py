@@ -3,8 +3,26 @@ import os
 from os import PathLike
 from typing import Any
 
+from ._jinja import render_string
 from ._utils import _create_app_file, _create_subdir, _generate_secret_key
-from ._utils import EXTENSION_DIR
+from ._utils import _extract_file_extension, EXTENSION_DIR
+
+
+def _create_app_file(app_name: str, root: str, file: str, dest: str, **context: Any):
+    extension, new_extension = _extract_file_extension(file=file)
+    file_path = os.path.join(root, file)
+
+    with open(file_path, encoding='utf-8') as template_file:
+        template_content = template_file.read()
+
+    context.update({ 'app_name': app_name.lower() })
+    template_string = render_string(template_content, **context)
+
+    new_file = file.replace(extension, new_extension)
+    new_file_path = os.path.join(app_name, dest, new_file)
+
+    with open(new_file_path, mode='w', encoding='utf-8') as file:
+        file.write(template_string)
 
 
 def _create_template_file(app: str, dest: str, template: str, **context: Any) -> None:

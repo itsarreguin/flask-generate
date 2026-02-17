@@ -1,0 +1,14 @@
+from peewee import *
+
+{% if app_type == 'mvc' -%}
+    from {{ app_name }}.models.base import BaseModel
+{% else -%}
+    from {{ app_name }}.{{ blueprint_name }}.models import BaseModel
+{% endif %}
+
+
+class {{ model_name }}(BaseModel):
+
+    {% for name, type in fields -%}
+        {{ field_name(name) }} = {{ table_field(type) }}
+    {% endfor %}

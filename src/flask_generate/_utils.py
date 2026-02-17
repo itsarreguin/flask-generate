@@ -1,30 +1,11 @@
 import os
+import re
 import secrets
 
 from pathlib import Path
-from typing import Any
-
-from ._jinja import render_string
 
 
 EXTENSION_DIR = Path(__file__).resolve().parent
-
-
-def _create_app_file(app_name: str, root: str, file: str, dest: str, **context: Any):
-    extension, new_extension = _extract_file_extension(file=file)
-    file_path = os.path.join(root, file)
-
-    with open(file_path, encoding='utf-8') as template_file:
-        template_content = template_file.read()
-
-    context.update({ 'app_name': app_name.lower() })
-    template_string = render_string(template_content, **context)
-
-    new_file = file.replace(extension, new_extension)
-    new_file_path = os.path.join(app_name, dest, new_file)
-
-    with open(new_file_path, mode='w', encoding='utf-8') as file:
-        file.write(template_string)
 
 
 def _create_subdir(app_name: str, *paths: str) -> None:
@@ -47,3 +28,13 @@ def _generate_secret_key(length: int = 48) -> str:
     chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     special_chars = '@&-_─^~#*'
     return ''.join(secrets.choice(chars + special_chars) for _ in range(length))
+
+
+def _sanitize_field_name(string: str) -> str:
+    return re.sub(r'[^\w]+', '_', string.lower())
+
+
+def _get_field_name_and_type(value: str) -> str:
+    field_name, field_type = value.split(':')
+    field_name = _sanitize_field_name(field_name)
+    return field_name, field_type.lower()
