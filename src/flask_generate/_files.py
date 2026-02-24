@@ -4,7 +4,7 @@ from os import PathLike
 from typing import Any
 
 from ._jinja import render_string
-from ._utils import _create_app_file, _create_subdir, _generate_secret_key
+from ._utils import _create_subdir, _generate_secret_key
 from ._utils import _extract_file_extension, EXTENSION_DIR
 
 

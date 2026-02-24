@@ -11,7 +11,7 @@ BASE_DIR = APP_DIR.parent
 SECRET_KEY = '{{ secret_key }}'
 
 
-GENERATE_APP_STRUCTURE_TYPE = '{{ app_type }}'
+GENERATE_APP_TYPE = '{{ app_type }}'
 GENERATE_ORM = '{{ orm }}'
 
 

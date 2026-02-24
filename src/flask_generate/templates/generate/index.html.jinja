@@ -3,9 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flask</title>
+  <title>Welcome to Flask</title>
+  <link rel="stylesheet" href="{{ url_for('flask_generate.static', filename='css/styles.css') }}">
 </head>
 <body>
-
+  <header class="w-full header">
+    <img
+      src="{{ url_for('flask_generate.static', filename='flask-icon.svg') }}"
+      alt="Flask Logo"
+      width="60px"
+      height="60px"
+    >
+  </header>
+  <main class="w-full h-screen" style="position:relative; display:flex; align-items:center;">
+    <div class="card-container">
+    {% for obj in object_list %}
+      <a class="card" href="{{ obj.link }}" target="_blank">
+        <section class="w-full" style="display: flex;">
+          <span class="card-icon">{{ obj.icon(size="32") }}</span>
+        </section>
+        <section class="card-content">
+          <h3 class="card-title text-white">{{ obj.title }}</h3>
+          <p class="card-text text-gray">{{ obj.description }}</p>
+        </section>
+      </a>
+    {% endfor %}
+    </div>
+    <footer class="w-full footer">
+      <section class="footer-row">
+        <div class="w-full flex" style="padding: 15px 15px; justify-content:center;">
+          <span class="text-white flex">
+            Python Version: <p class="text-aqua" style="margin-left: 4px;">{{ py_version }}</p>
+          </span>
+        </div>
+        <span class="footer-line-vertical flex"></span>
+        <div class="w-full flex" style="padding: 15px 15px; justify-content:center;">
+          <a class="text-white" href="https://www.palletsprojects.com/" target="_blank">
+            Pallets Projects
+          </a>
+        </div>
+        <span class="footer-line-vertical flex"></span>
+        <div class="w-full flex" style="padding: 15px 15px; justify-content:center;">
+          <span class="text-white flex">
+            Flask Version: <p class="text-aqua" style="margin-left: 4px;">{{ flask_version }}</p>
+          </span>
+        </div>
+      </section>
+    </footer>
+  </main>
 </body>
 </html>
