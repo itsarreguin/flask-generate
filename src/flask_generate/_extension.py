@@ -1,5 +1,7 @@
 from flask import Flask
 
+from .cli import generate
+
 
 class Generate:
 
@@ -15,3 +17,4 @@ class Generate:
                 'A Generate extension is already initialized on this application.'
             )
         app.extensions['generate'] = self
+        app.cli.add_command(generate, 'generate')

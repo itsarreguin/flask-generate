@@ -1,0 +1,6 @@
+from flask import Blueprint
+
+
+path = Blueprint('{{ blueprint_name }}', __name__, url_prefix='/{{ blueprint_name }}')
+
+from {{ app_name }}.{{ blueprint_name }} import routes as routes

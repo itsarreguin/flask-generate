@@ -30,7 +30,7 @@ sqlalchemy_fields = {
     'float': 'Float',
     'int': 'Integer',
     'small-int': 'SmallInteger',
-    'str': 'String',
+    'str': 'String(255)',
     'text': 'Text',
     'time': 'Time',
     'uuid': 'Uuid'
@@ -38,17 +38,16 @@ sqlalchemy_fields = {
 
 
 def _make_form_label(value: str) -> str:
-    field, _ = _get_field_name_and_type(value)
-    field = (
-        field.replace('_', ' ').replace('-', ' ') if '_' or '-' in value
+    label = (
+        value.replace('_', ' ').replace('-', ' ') if '_' or '-' in value
         else value
     )
-    return field.title()
+    return label.title()
 
 
 def field_name(value: str) -> str:
-    field_name, _ = _get_field_name_and_type(value).lower()
-    return field_name
+    field_name, _ = _get_field_name_and_type(value)
+    return field_name.lower()
 
 
 def field_type(value: str) -> str:
@@ -62,8 +61,16 @@ def form_field(value: str) -> str:
 
     form_fields = {
         'bool': f"BooleanField(label='{field_label}')",
-        'str': f"StringField(label='{field_label}')",
+        'date': f"DateField(label='{field_label}')",
+        'datetime': f"DateTimeField(label='{field_label}')",
+        'email': f"EmailField(label='{field_label}')",
         'file': f"FileField(label='{field_label}')",
+        'float': f"FloatField(label='{field_label}')",
+        'int': f"IntegerField(label='{field_label}')",
+        'str': f"StringField(label='{field_label}')",
+        'tel': f"TelField(label='{field_label}')",
+        'time': f"TimeField(label='{field_label}')",
+        'url': f"URLField(label='{field_label}')",
     }
     return form_fields[field_type]
 
@@ -75,6 +82,6 @@ def import_fields(value: str) -> str:
 def table_field(orm: str, value: str) -> str:
     _, field_type = _get_field_name_and_type(value)
 
-    if orm == 'sqla':
+    if orm == 'sqlalchemy':
         return f'mapped_column({sqlalchemy_fields[field_type]})'
     return peewee_fields[field_type]

@@ -7,6 +7,8 @@ APP_DIR = Path(__file__).resolve().parent.parent
 
 BASE_DIR = APP_DIR.parent
 
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
 
 SECRET_KEY = '{{ secret_key }}'
 

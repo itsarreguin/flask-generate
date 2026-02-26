@@ -1,8 +1,7 @@
-from flask import Blueprint, request, render_template
+from flask import request, render_template, redirect, url_for
 from flask.wrappers import Response
 
-
-path = Blueprint('{{ blueprint_name }}', __name__, url_prefix='/{{ blueprint_name }}')
+from {{ app_name }}.{{ blueprint_name }} import path
 
 
 @path.route('/')

@@ -30,11 +30,15 @@ def _generate_secret_key(length: int = 48) -> str:
     return ''.join(secrets.choice(chars + special_chars) for _ in range(length))
 
 
-def _sanitize_field_name(string: str) -> str:
+def _get_app_name(value: str) -> str:
+    return value.split('.')[0] if '.' in value else value
+
+
+def _to_snake_case(string: str) -> str:
     return re.sub(r'[^\w]+', '_', string.lower())
 
 
 def _get_field_name_and_type(value: str) -> str:
     field_name, field_type = value.split(':')
-    field_name = _sanitize_field_name(field_name)
+    field_name = _to_snake_case(field_name)
     return field_name, field_type.lower()

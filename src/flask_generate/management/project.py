@@ -10,7 +10,7 @@ def cli():
 
 
 @cli.command()
-@click.option('--name', help='App name')
+@click.argument('name', type=str)
 @click.option('--type', help='App structure type', default='mvc')
 @click.option('--orm', help='Choice an ORM: SQLAlchemy/Peewee', default='sqla')
 def app(name: str, type: str, orm: str):
