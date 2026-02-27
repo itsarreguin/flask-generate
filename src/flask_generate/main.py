@@ -1,6 +1,6 @@
 import click
 
-from ..generators import create_blueprint_structure, create_mvc_structure
+from .generators import create_blueprint_structure, create_mvc_structure
 
 
 @click.group
@@ -19,5 +19,5 @@ def app(name: str, type: str, orm: str):
         create_mvc_structure(name, orm)
 
 
-def execute_cli():
+def execute():
     cli()
