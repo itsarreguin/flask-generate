@@ -4,12 +4,26 @@ from os import PathLike
 from typing import Any, TypeAlias
 
 from ._jinja import render_string
-from ._utils import _create_subdir, _generate_secret_key
-from ._utils import _to_snake_case, _extract_file_extension
+from ._utils import _create_subdir, _to_snake_case, _extract_file_extension
 from ._utils import EXTENSION_DIR
 
 
 PathType: TypeAlias = str | bytes | PathLike
+
+
+def append_content(
+    app_name: str, template: str, dest: PathLike, filename: str, **context: Any
+) -> None:
+    template_path = os.path.join(EXTENSION_DIR, 'templates', template)
+
+    with open(template_path) as templ:
+        template_content = templ.read()
+
+    content = render_string(template_content, **context)
+
+    file_path = os.path.join(app_name, dest, filename)
+    with open(file_path, mode='a', encoding='utf-8') as file:
+        file.write('\n\n\n' + content)
 
 
 def create_app_file(
@@ -33,7 +47,7 @@ def create_app_file(
         template.write(template_string)
 
 
-def create_template_file(
+def create_templ_file(
     app: str, dest: str, template: str, filename: str | None = None, **context: Any
 ) -> None:
     template_path = os.path.join(EXTENSION_DIR, 'templates')
@@ -65,34 +79,5 @@ def generate_structure(app_name: str, path: PathType, dest: PathType, **context:
                     create_app_file(app_name, root_dir, template,  None, dest, **context)
 
 
-def create_mvc_app_structure(app_name: str, orm: str = None) -> None:
-    app_name = _to_snake_case(string=app_name)
-    os.mkdir(app_name)
-    paths = ['blueprints', 'cli', 'forms', 'models', 'tasks']
-    init_file = '__init__.py-tpl'
-    path = os.path.join('', 'templates', 'app_template')
-
-    generate_structure(app_name, path, os.path.join(''), **{
-        'secret_key': _generate_secret_key(),
-        'app_type': 'mvc',
-        'orm': orm
-    })
-
-    for path_name in paths:
-        _create_subdir(app_name, path_name)
-        create_template_file(app_name, path_name, init_file)
-
-    _create_subdir(app_name, 'templates')
-    create_template_file(app_name, 'templates', 'base.html-tpl')
-
-
-def create_blueprint_app_structure(app_name: str, orm: str = None) -> None:
-    app_name = _to_snake_case(string=app_name)
-    os.mkdir(app_name)
-    path = os.path.join('', 'templates', 'app_template')
-
-    generate_structure(app_name, path, os.path.join(''), **{
-        'secret_key': _generate_secret_key(),
-        'app_type': 'blueprint',
-        'orm': orm
-    })
+def has_content(file: PathLike) -> bool:
+    return True if os.stat(file).st_size > 0 else False

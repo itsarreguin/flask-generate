@@ -1,6 +1,3 @@
-from peewee import *
-
-
 class {{ model_name }}(Model):
 
     {% for field in fields -%}

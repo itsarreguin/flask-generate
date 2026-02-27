@@ -1,7 +1,6 @@
 import click
 
-from .._files import create_mvc_app_structure
-from .._files import create_blueprint_app_structure
+from ..generators import create_blueprint_structure, create_mvc_structure
 
 
 @click.group
@@ -12,12 +11,12 @@ def cli():
 @cli.command()
 @click.argument('name', type=str)
 @click.option('--type', help='App structure type', default='mvc')
-@click.option('--orm', help='Choice an ORM: SQLAlchemy/Peewee', default='sqla')
+@click.option('--orm', help='Choice an ORM: SQLAlchemy/Peewee', default='sqlalchemy')
 def app(name: str, type: str, orm: str):
     if type == 'blueprint':
-        create_blueprint_app_structure(name, orm)
+        create_blueprint_structure(name, orm)
     else:
-        create_mvc_app_structure(name, orm)
+        create_mvc_structure(name, orm)
 
 
 def execute_cli():

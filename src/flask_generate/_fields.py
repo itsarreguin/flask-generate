@@ -1,5 +1,22 @@
-from ._utils import _get_field_name_and_type
+from ._utils import _get_field_name_and_type, _to_snake_case
 
+
+sqla_mapping_types = {
+    'big-int': 'int',
+    'bool': 'bool',
+    'date': 'date',
+    'datetime': 'datetime',
+    'decimal': 'decimal',
+    'double': 'float',
+    'file': 'str',
+    'float': 'float',
+    'int': 'int',
+    'small-int': 'int',
+    'str': 'str',
+    'text': 'str',
+    'time': 'time',
+    'uuid': 'UUID'
+}
 
 peewee_fields = {
     'big-int': 'BitIntegerField()',
@@ -30,7 +47,7 @@ sqlalchemy_fields = {
     'float': 'Float',
     'int': 'Integer',
     'small-int': 'SmallInteger',
-    'str': 'String(255)',
+    'str': 'String',
     'text': 'Text',
     'time': 'Time',
     'uuid': 'Uuid'
@@ -52,7 +69,7 @@ def field_name(value: str) -> str:
 
 def field_type(value: str) -> str:
     _, field_type = _get_field_name_and_type(value)
-    return field_type
+    return sqla_mapping_types[field_type]
 
 
 def form_field(value: str) -> str:
@@ -75,8 +92,11 @@ def form_field(value: str) -> str:
     return form_fields[field_type]
 
 
-def import_fields(value: str) -> str:
-    pass
+def import_fields(fields: list[str]) -> str:
+    field_list = [
+        sqlalchemy_fields[_get_field_name_and_type(field)[1]] for field in fields
+    ]
+    return ', '.join(field_list)
 
 
 def table_field(orm: str, value: str) -> str:
@@ -85,3 +105,7 @@ def table_field(orm: str, value: str) -> str:
     if orm == 'sqlalchemy':
         return f'mapped_column({sqlalchemy_fields[field_type]})'
     return peewee_fields[field_type]
+
+
+def table_name(value: str) -> str:
+    return _to_snake_case(value)

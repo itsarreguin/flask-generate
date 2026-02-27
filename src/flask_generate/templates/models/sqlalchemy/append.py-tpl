@@ -1,17 +1,9 @@
-from datetime import datetime
-
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import DateTime, Integer, {% for field in fields %}{{ import_fields(field) }}{% endfor %}
-
-from {{ app_name }}.extensions import db
-
-
 class {{ model_name }}(db.Model):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     {% for field in fields -%}
-        {{ field_name(field) }}: Mapped[{{ field_type(field) }}] = {{ table_field(field) }}
-    {% endfor %}
+        {{ field_name(field) }}: Mapped[{{ field_type(field) }}] = {{ table_field(orm, field) }}
+    {% endfor -%}
     created_at: Mapped[datetime] = mapped_column(DateTime)
     updated_at: Mapped[datetime] = mapped_column(DateTime)
 

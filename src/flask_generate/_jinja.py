@@ -3,7 +3,8 @@ from typing import Any
 from flask import get_template_attribute
 from jinja2 import Environment, Template
 
-from ._fields import field_name, field_type, form_field, table_field
+from ._fields import field_name, field_type, form_field, import_fields
+from ._fields import table_field, table_name
 
 
 jinja_env = Environment()
@@ -13,7 +14,9 @@ jinja_env.globals.update(
         'field_name': field_name,
         'field_type': field_type,
         'form_field': form_field,
-        'table_field': table_field
+        'import_fields': import_fields,
+        'table_field': table_field,
+        'table_name': table_name
     }
 )
 
