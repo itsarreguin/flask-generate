@@ -34,6 +34,15 @@ def _get_app_name(value: str) -> str:
     return value.split('.')[0] if '.' in value else value
 
 
+def _get_required_settings(current_app) -> list[str]:
+    app_name = _get_app_name(current_app.name)
+    app_dir = current_app.config['APP_DIR']
+    app_type = current_app.config['GENERATE_APP_TYPE']
+    orm = current_app.config['GENERATE_ORM']
+
+    return [app_name, app_dir, app_type, orm]
+
+
 def _to_snake_case(string: str) -> str:
     return re.sub(r'[^\w]+', '_', string.lower())
 
