@@ -108,4 +108,35 @@ def blueprint_scaffold(attributes: list[str], **context: Any) -> None:
 
 
 def mvc_scaffold(attributes: list[str], **context: Any) -> None:
-    app_name, app_dir, app_type, orm = attributes
+    app_name, _, _, orm = attributes
+    destination = context['blueprint_name']
+
+    os.mkdir(os.path.join(app_name, 'templates', destination))
+    create_model(
+        app_name=app_name,
+        orm=orm,
+        path=os.path.join(app_name, 'models', f'{destination}.py'),
+        dest='models',
+        filename=destination,
+        **context
+    )
+    create_form(
+        app_name=app_name,
+        path=os.path.join(app_name, 'forms', f'{destination}.py'),
+        dest='forms',
+        filename=destination,
+        **context
+    )
+    generate_structure(
+        app_name=app_name,
+        path=os.path.join('', 'templates', 'jinja_templates'),
+        dest=os.path.join('templates', destination),
+        **context
+    )
+    create_templ_file(
+        app=app_name,
+        dest='blueprints',
+        template=os.path.join('', 'scaffolding', 'blueprint.py-tpl'),
+        filename=destination,
+        **{ 'orm': orm, **context }
+    )

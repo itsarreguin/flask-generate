@@ -80,7 +80,7 @@ def model(name: str, fields: list[str], dest: str | None):
 @click.argument('fields', nargs=-1, type=str)
 @with_appcontext
 def scaffold(name: str, model: str, fields: list[str]):
-    _, _, app_type, _ = _get_required_settings(current_app)
+    _, _, app_type, orm = _get_required_settings(current_app)
     context = {
         'blueprint_name': _to_snake_case(name),
         'model_name': model,
