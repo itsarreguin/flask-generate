@@ -1,7 +1,7 @@
 from flask import request, render_template, redirect, url_for
 from flask.wrappers import Response
 
-from {{ app_name }}.{{ blueprint_name }} import path
+from [[ app_name ]].[[ blueprint_name ]] import path
 
 
 @path.route('/')

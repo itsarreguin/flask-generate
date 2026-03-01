@@ -1,13 +1,4 @@
 from peewee import *
 
 
-class {{ model_name }}(Model):
-
-    {% for field in fields -%}
-        {{ field_name(field) }} = {{ table_field(orm, field) }}
-    {% endfor -%}
-    created_at = DateTimeField()
-    updated_at = DateTimeField()
-
-    class Meta:
-        database = database
+[% include "models/peewee/append.py-tpl" %]

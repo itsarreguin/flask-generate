@@ -1,0 +1,13 @@
+from flask import request, render_template, redirect, url_for
+from flask.wrappers import Response
+
+from sqlalchemy import select
+
+from [[ app_name ]].extensions import db
+from [[ app_name ]].[[ blueprint_name ]] import path
+from [[ app_name ]].[[ blueprint_name ]].models import [[ model_name ]]
+from [[ app_name ]].[[ blueprint_name ]].forms import [[ form_name ]]Form
+from [[ app_name ]].utils import get_form_data, update_instance
+
+
+[% include 'scaffolding/routes/sqlalchemy.py-tpl' %]

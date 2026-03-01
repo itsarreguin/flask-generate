@@ -4,9 +4,10 @@ import click
 from flask import current_app
 from flask.cli import with_appcontext
 
-from ._files import create_templ_file, generate_structure
+from ._files import create_templ_file
 from ._utils import _get_required_settings, _to_snake_case
-from .generators import create_form, create_model
+from .generators import create_form, create_model, generate_blueprint_pkg
+from .generators import blueprint_scaffold, mvc_scaffold
 
 
 @click.group('generate')
@@ -24,10 +25,7 @@ def blueprint(name: str):
     context = { 'blueprint_name': bp_name }
 
     if app_type == 'blueprint':
-        template_root_path = os.path.join('', 'templates', 'blueprint')
-        os.mkdir(os.path.join(app_name, bp_name))
-
-        generate_structure(app_name, template_root_path, bp_name, **context)
+        generate_blueprint_pkg(bp_name, app_name, 'blueprint', **context)
     else:
         template: str = 'blueprint.py-tpl'
         dest: str = 'blueprints'
@@ -82,4 +80,15 @@ def model(name: str, fields: list[str], dest: str | None):
 @click.argument('fields', nargs=-1, type=str)
 @with_appcontext
 def scaffold(name: str, model: str, fields: list[str]):
-    pass
+    _, _, app_type, _ = _get_required_settings(current_app)
+    context = {
+        'blueprint_name': _to_snake_case(name),
+        'model_name': model,
+        'fields': fields,
+        'form_name': model,
+    }
+
+    if app_type == 'blueprint':
+        blueprint_scaffold(_get_required_settings(current_app), **context)
+    else:
+        mvc_scaffold(_get_required_settings(current_app), **context)

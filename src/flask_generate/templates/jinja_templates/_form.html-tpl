@@ -1,0 +1,9 @@
+<form action="{{ endpoint }}" method="post">
+  {{ form.csrf_token() }}
+  {% for field in form %}
+  <div>
+    {{ field.label() }}
+    {{ field() }}
+  </div>
+  {% endfor %}
+</form>

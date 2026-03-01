@@ -1,1 +1,1 @@
-from {{ app_name }}.settings.base import *
+from [[ app_name ]].settings.base import *

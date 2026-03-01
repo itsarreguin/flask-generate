@@ -1,6 +1,0 @@
-class {{ form_name }}Form(FlaskForm):
-
-    {% for field in fields -%}
-        {{ field_name(field) }} = fields.{{ form_field(field) }}
-    {% endfor -%}
-    submit = fields.SubmitField('Submit')

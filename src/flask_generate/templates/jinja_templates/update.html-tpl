@@ -1,0 +1,13 @@
+{% extends "base.html.jinja" %}
+
+{% block content %}
+  <header>
+    <h1>Update [[ snake_to_title(blueprint_name) ]]: {{ obj.id }}</h1>
+    <a href="{{ url_for('[[blueprint_name]].index') }}">Back</a>
+  </header>
+  <div>
+    {% with endpoint = url_for('[[ blueprint_name ]].update', id=obj.id) %}
+      {% include "[[ blueprint_name ]]/_form.html.jinja" %}
+    {% endwith %}
+  </div>
+{% endblock content %}

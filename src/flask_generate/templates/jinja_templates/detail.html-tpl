@@ -1,0 +1,8 @@
+{% extends "base.html.jinja" %}
+
+{% block content %}
+  <header>
+    <h1>[[ snake_to_title(blueprint_name) ]]: {{ obj.id }}</h1>
+    <a href="{{ url_for('[[blueprint_name]].index') }}">Back</a>
+  </header>
+{% endblock content %}

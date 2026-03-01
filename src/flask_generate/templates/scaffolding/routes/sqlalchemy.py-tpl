@@ -1,0 +1,51 @@
+@path.route('/')
+def index() -> Response:
+    object_list = db.session.scalars(select([[ model_name ]])).all()
+    context = {
+        'object_list': object_list
+    }
+    return render_template('[[ blueprint_name ]]/index.html.jinja', **context)
+
+
+@path.route('/create/', methods=['GET', 'POST'])
+def create() -> Response:
+    form = [[ form_name ]]Form(request.form)
+
+    if request.method == 'POST' and form.validate_on_submit():
+        obj = [[ model_name ]](**get_form_data(form))
+        db.session.add(obj)
+        db.session.commit()
+
+        return redirect(url_for('[[ blueprint_name ]].detail', id=obj.id))
+
+    return render_template('[[ blueprint_name ]]/create.html.jinja', form=form)
+
+
+@path.route('/<int:id>/')
+def detail(id: int) -> Response:
+    obj = db.session.scalar(select([[ model_name ]]).where([[ model_name ]].id == id))
+    return render_template('[[ blueprint_name ]]/detail.html.jinja', obj=obj)
+
+
+@path.route('/<int:id>/update/', methods=['GET', 'POST'])
+def update(id: int) -> Response:
+    form = [[ form_name ]]Form(request.form)
+    obj = db.session.scalar(select([[ model_name ]]).where([[ model_name ]].id == id))
+
+    if request.method == 'POST' and form.validate_on_submit():
+        pass
+
+    context = { 'obj': obj, 'form': form }
+    return render_template('[[ blueprint_name ]]/update.html.jinja', **context)
+
+
+@path.route('/<int:id>/delete/', methods=['POST'])
+def delete(id: int) -> Response:
+    obj = db.session.scalar(select([[ model_name ]]).where([[ model_name ]].id == id))
+    if obj is not None:
+        db.session.delete(obj)
+        db.session.commit()
+
+        return redirect(url_for('[[ blueprint_name ]].index'))
+
+    return redirect(url_for('[[ blueprint_name ]].index'))

@@ -1,0 +1,18 @@
+{% extends "base.html.jinja" %}
+
+{% block content %}
+  <header>
+    <h1>[[ snake_to_title(blueprint_name) ]]</h1>
+    <a href="{{ url_for('[[ blueprint_name ]].create') }}">New [[ model_name ]]</a>
+  </header>
+
+  <ul>
+  {% for obj in object_list %}
+    <li>
+        <a href="{{ url_for('[[ blueprint_name ]].detail', id=obj.id) }}">
+          <span>{{ obj.id }}</span>
+        </a>
+    </li>
+  {% endfor %}
+  </ul>
+{% endblock content %}

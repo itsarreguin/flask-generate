@@ -4,15 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    {%- set page_title = app_name.title() %}
-    {{ '{% block title %}' }}{{ page_title }}{{ '{% endblock title %}' }}
+    {% block title %}[[ app_name.title() ]]{% endblock title %}
   </title>
 </head>
 <body>
   <main>
-    {% raw -%}
-      {% block content %}{% endblock content %}
-    {%- endraw %}
+    {% block content %}{% endblock content %}
   </main>
 </body>
 </html>

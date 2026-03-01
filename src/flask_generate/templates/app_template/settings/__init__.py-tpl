@@ -2,6 +2,6 @@ from flask.helpers import get_debug_flag
 
 
 if get_debug_flag():
-    from {{ app_name }}.settings.dev import *
+    from [[ app_name ]].settings.dev import *
 else:
-    from {{ app_name }}.settings.prod import *
+    from [[ app_name ]].settings.prod import *

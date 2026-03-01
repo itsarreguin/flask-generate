@@ -1,0 +1,4 @@
+from flask_wtf import FlaskForm
+from wtforms import fields, validators, widgets
+
+[% include "forms/base.py-tpl" %]

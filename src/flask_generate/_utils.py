@@ -47,6 +47,10 @@ def _to_snake_case(string: str) -> str:
     return re.sub(r'[^\w]+', '_', string.lower())
 
 
+def snake_to_title(value: str) -> str:
+    return value.replace('_', ' ').title()
+
+
 def _get_field_name_and_type(value: str) -> str:
     field_name, field_type = value.split(':')
     field_name = _to_snake_case(field_name)

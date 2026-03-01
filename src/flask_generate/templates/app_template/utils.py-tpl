@@ -1,0 +1,15 @@
+from wtforms import Form
+from wtforms.fields import HiddenField, SubmitField
+
+
+def get_form_data(form: Form) -> dict[str, str]:
+    form._fields.pop('csrf_token')
+    data = {
+        field.name: field.data for field in form._fields.values()
+        if type(field) not in (HiddenField, SubmitField)
+    }
+    return data
+
+
+def update_instance(instance, form: Form):
+    pass

@@ -10,11 +10,11 @@ BASE_DIR = APP_DIR.parent
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = '[[ secret_key ]]'
 
 
-GENERATE_APP_TYPE = '{{ app_type }}'
-GENERATE_ORM = '{{ orm }}'
+GENERATE_APP_TYPE = '[[ app_type ]]'
+GENERATE_ORM = '[[ orm ]]'
 
 
 SQLALCHEMY_DATABASE_URI='sqlite:///db.sqlite3'
