@@ -12,7 +12,7 @@ PathType: TypeAlias = str | bytes | PathLike
 
 
 def append_content(
-    app_name: str, template: str, dest: PathLike, filename: str, **context: Any
+    app_name: str, template: str, dest: PathType, filename: str, **context: Any
 ) -> None:
     template_path = os.path.join(EXTENSION_DIR, 'templates', template)
 
@@ -27,8 +27,8 @@ def append_content(
 
 
 def create_app_file(
-    app_name: str, root: str, file: str, filename: str | None, dest: str, **context: Any
-):
+    app_name: str, root: PathType, file: str, filename: str | None, dest: PathType, **context: Any
+) -> None:
     extension, new_extension = _extract_file_extension(file=file)
     file_path = os.path.join(root, file)
 
@@ -48,7 +48,7 @@ def create_app_file(
 
 
 def create_templ_file(
-    app: str, dest: str, template: str, filename: str | None = None, **context: Any
+    app: str, dest: PathType, template: str, filename: str | None = None, **context: Any
 ) -> None:
     template_path = os.path.join(EXTENSION_DIR, 'templates')
     return create_app_file(app, template_path, template, filename, dest, **context)
@@ -79,5 +79,5 @@ def generate_structure(app_name: str, path: PathType, dest: PathType, **context:
                     create_app_file(app_name, root_dir, template,  None, dest, **context)
 
 
-def has_content(file: PathLike) -> bool:
+def has_content(file: PathType) -> bool:
     return True if os.stat(file).st_size > 0 else False

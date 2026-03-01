@@ -5,13 +5,13 @@ from sqlalchemy import select
 
 from [[ app_name ]].extensions import db
 from [[ app_name ]].[[ blueprint_name ]] import path
-from [[ app_name ]].[[ blueprint_name ]].models import [[ model_name ]]
 from [[ app_name ]].[[ blueprint_name ]].forms import [[ form_name ]]Form
-from [[ app_name ]].utils import get_form_data, update_instance
+from [[ app_name ]].[[ blueprint_name ]].models import [[ model_name ]]
+from [[ app_name ]].utils import get_form_data, set_instance, update_instance
 
 
 [% if orm == 'sqlalchemy' %]
-    [%- include 'scaffolding/routes/sqlalchemy.py-tpl' %]
+    [%- include 'scaffolding/routes/sqlalchemy.py-tpl' -%]
 [% else %]
-    [%- include 'scaffolding/routes/peewee.py-tpl' %]
+    [%- include 'scaffolding/routes/peewee.py-tpl' -%]
 [% endif -%]

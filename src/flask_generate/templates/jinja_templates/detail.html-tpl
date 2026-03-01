@@ -5,4 +5,22 @@
     <h1>[[ snake_to_title(blueprint_name) ]]: {{ obj.id }}</h1>
     <a href="{{ url_for('[[blueprint_name]].index') }}">Back</a>
   </header>
+  <div>
+    <ul>
+    [%- for field in fields %]
+      <li>[[ snake_to_title(field_name(field)) ]]: {{ obj.[[ field_name(field) ]] }}</li>
+    [%- endfor %]
+    </ul>
+  </div>
+  <footer>
+    <ol>
+      <a href="{{ url_for('[[ blueprint_name ]].update', id=obj.id) }}">
+        Edit
+      </a>
+      <form action="{{ url_for('[[ blueprint_name ]].delete', id=obj.id) }}" method="post">
+        <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+        <button type="submit">Delete</button>
+      </form>
+    </ol>
+  </footer>
 {% endblock content %}

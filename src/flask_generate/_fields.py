@@ -6,7 +6,7 @@ sqla_mapping_types = {
     'bool': 'bool',
     'date': 'date',
     'datetime': 'datetime',
-    'decimal': 'decimal',
+    'decimal': 'Decimal',
     'double': 'float',
     'file': 'str',
     'float': 'float',
@@ -77,17 +77,22 @@ def form_field(value: str) -> str:
     field_label: str = _make_form_label(field_name)
 
     form_fields = {
-        'bool': f"BooleanField(label='{field_label}')",
-        'date': f"DateField(label='{field_label}')",
-        'datetime': f"DateTimeField(label='{field_label}')",
-        'email': f"EmailField(label='{field_label}')",
-        'file': f"FileField(label='{field_label}')",
-        'float': f"FloatField(label='{field_label}')",
-        'int': f"IntegerField(label='{field_label}')",
-        'str': f"StringField(label='{field_label}')",
-        'tel': f"TelField(label='{field_label}')",
-        'time': f"TimeField(label='{field_label}')",
-        'url': f"URLField(label='{field_label}')",
+        'big-int': f"IntegerField('{field_label}')",
+        'bool': f"BooleanField('{field_label}')",
+        'date': f"DateField('{field_label}')",
+        'datetime': f"DateTimeField('{field_label}')",
+        'decimal': f"DecimalField('{field_label}')",
+        'email': f"EmailField('{field_label}')",
+        'file': f"FileField('{field_label}')",
+        'float': f"FloatField('{field_label}')",
+        'int': f"IntegerField('{field_label}')",
+        'password': f"PasswordField('{field_label}')",
+        'small-int': f"IntegerField('{field_label}')",
+        'str': f"StringField('{field_label}')",
+        'tel': f"TelField('{field_label}')",
+        'text': f"TextAreaField('{field_label}')",
+        'time': f"TimeField('{field_label}')",
+        'url': f"URLField('{field_label}')",
     }
     return form_fields[field_type]
 

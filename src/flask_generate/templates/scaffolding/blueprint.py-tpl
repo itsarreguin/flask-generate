@@ -4,16 +4,16 @@ from flask.wrappers import Response
 from sqlalchemy import select
 
 from [[ app_name ]].extensions import db
-from [[ app_name ]].models.[[ blueprint_name ]] import [[ model_name ]]
 from [[ app_name ]].forms.[[ blueprint_name ]] import [[ form_name ]]Form
-from [[ app_name ]].utils import get_form_data, update_instance
+from [[ app_name ]].models.[[ blueprint_name ]] import [[ model_name ]]
+from [[ app_name ]].utils import get_form_data, set_instance, update_instance
 
 
 path = Blueprint('[[ blueprint_name ]]', __name__, url_prefix='/[[ blueprint_name ]]')
 
 
 [% if orm == 'sqlalchemy' %]
-    [%- include 'scaffolding/routes/sqlalchemy.py-tpl' %]
+    [%- include 'scaffolding/routes/sqlalchemy.py-tpl' -%]
 [% else %]
-    [%- include 'scaffolding/routes/peewee.py-tpl' %]
+    [%- include 'scaffolding/routes/peewee.py-tpl' -%]
 [% endif -%]

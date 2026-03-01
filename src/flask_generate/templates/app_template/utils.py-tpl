@@ -11,5 +11,16 @@ def get_form_data(form: Form) -> dict[str, str]:
     return data
 
 
-def update_instance(instance, form: Form):
-    pass
+def set_instance(obj: object, form: Form) -> Form:
+    form._fields.pop('csrf_token')
+    for key, _ in form._fields.items():
+        field = getattr(obj, key) if key != 'submit' else key
+        getattr(form, key).data = field
+    return form
+
+
+def update_instance(obj: object, data: dict[str, str]) -> None:
+    data.pop('csrf_token')
+    data.pop('submit')
+    for key, value in data.items():
+        setattr(obj, key, value)

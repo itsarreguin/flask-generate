@@ -33,7 +33,12 @@ def update(id: int) -> Response:
     obj = db.session.scalar(select([[ model_name ]]).where([[ model_name ]].id == id))
 
     if request.method == 'POST' and form.validate_on_submit():
-        pass
+        update_instance(obj, form.data)
+        db.session.commit()
+
+        return redirect(url_for('[[ blueprint_name ]].detail', id=obj.id))
+
+    set_instance(obj, form)
 
     context = { 'obj': obj, 'form': form }
     return render_template('[[ blueprint_name ]]/update.html.jinja', **context)
