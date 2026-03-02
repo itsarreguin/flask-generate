@@ -11,6 +11,7 @@ def register_blueprints(app: Flask) -> None:
 def create_app(settings: str) -> Flask:
     app = Flask(__name__)
     app.config.from_object(settings)
+    app.static_folder = app.config['STATIC_DIR']
 
     register_extensions(app)
     register_blueprints(app)

@@ -3,8 +3,8 @@ class [[ model_name ]](Model):
     [% for field in fields -%]
         [[ field_name(field) ]] = [[ table_field(orm, field) ]]
     [% endfor -%]
-    created_at = DateTimeField()
-    updated_at = DateTimeField()
+    created_at = DateTimeField(null=True)
+    updated_at = DateTimeField(null=True)
 
     class Meta:
-        database = database
+        database = db

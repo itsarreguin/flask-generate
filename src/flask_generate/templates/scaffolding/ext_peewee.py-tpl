@@ -1,0 +1,11 @@
+from flask import Flask
+from flask_generate import Generate
+from flask_wtf import CSRFProtect
+
+from peewee import SqliteDatabase
+
+
+generate = Generate()
+csrf = CSRFProtect()
+
+db = SqliteDatabase('db.sqlite3')

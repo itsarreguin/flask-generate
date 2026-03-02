@@ -83,7 +83,12 @@ def blueprint_scaffold(attributes: list[str], **context: Any) -> None:
     app_name, _, _, orm = attributes
     bp_name: str = context.get('blueprint_name')
 
-    generate_blueprint_pkg(bp_name, app_name, 'scaffolding/blueprint', **context)
+    generate_blueprint_pkg(
+        name=bp_name,
+        app_name=app_name,
+        template=os.path.join('', 'scaffolding', 'blueprint'),
+        **{ 'orm': orm, **context }
+    )
     create_model(
         app_name=app_name,
         orm=orm,

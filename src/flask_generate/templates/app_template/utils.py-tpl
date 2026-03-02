@@ -24,3 +24,4 @@ def update_instance(obj: object, data: dict[str, str]) -> None:
     data.pop('submit')
     for key, value in data.items():
         setattr(obj, key, value)
+    return obj

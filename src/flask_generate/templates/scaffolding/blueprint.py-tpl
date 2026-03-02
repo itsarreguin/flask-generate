@@ -1,9 +1,11 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from flask.wrappers import Response
 
+[% if orm == 'sqlalchemy' -%]
 from sqlalchemy import select
 
 from [[ app_name ]].extensions import db
+[% endif -%]
 from [[ app_name ]].forms.[[ blueprint_name ]] import [[ form_name ]]Form
 from [[ app_name ]].models.[[ blueprint_name ]] import [[ model_name ]]
 from [[ app_name ]].utils import get_form_data, set_instance, update_instance

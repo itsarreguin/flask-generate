@@ -3,7 +3,7 @@
 {% block content %}
   <header>
     <h1>[[ snake_to_title(blueprint_name) ]]: {{ obj.id }}</h1>
-    <a href="{{ url_for('[[blueprint_name]].index') }}">Back</a>
+    <a href="{{ url_for('[[blueprint_name]].detail', id=obj.id) }}">Back</a>
   </header>
   <div>
     <ul>

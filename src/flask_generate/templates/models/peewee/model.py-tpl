@@ -1,4 +1,6 @@
 from peewee import *
 
+from [[ app_name ]].extensions import db
+
 
 [% include "models/peewee/append.py-tpl" %]
