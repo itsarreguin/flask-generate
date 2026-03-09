@@ -16,7 +16,6 @@ def app():
     Generate(app)
     app.config['GENERATE_APP_TYPE'] = 'mvc'
     app.config['GENERATE_ORM'] = 'sqlalchemy'
-    app.config['APP_DIR'] = Path(__file__).resolve().parent.parent
     return app
 
 

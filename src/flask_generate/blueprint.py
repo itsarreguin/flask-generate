@@ -34,13 +34,13 @@ def index():
         {
             'title': 'Extensions',
             'icon': get_icon('bolt_fill'),
-            'link': '',
-            'description': 'Discover lost of extensions, and make your apps more powerful.'
+            'link': 'https://www.github.com/pallets-eco/',
+            'description': 'Discover lots of extensions, and make your apps more powerful.'
         },
         {
             'title': 'Flask Generate',
             'icon': get_icon('command_line_fill'),
-            'link': '',
+            'link': 'https://www.github.com/itsarreguin/flask-generate/',
             'description': 'Learn more about Flask-Generate and speed up your development.'
         }
     ]
