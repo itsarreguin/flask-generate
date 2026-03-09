@@ -7,7 +7,7 @@ from ._files import append_content, has_content, PathLike
 from ._utils import _to_snake_case, _generate_secret_key, _create_subdir
 
 
-def create_blueprint_structure(app_name: str, orm: str = None) -> None:
+def create_blueprint_structure(app_name: str, orm: str = None) -> str:
     app_name = _to_snake_case(string=app_name)
     os.mkdir(app_name)
     path = os.path.join('', 'templates', 'app_template')
@@ -21,8 +21,10 @@ def create_blueprint_structure(app_name: str, orm: str = None) -> None:
     _create_subdir(app_name, 'templates')
     create_templ_file(app_name, 'templates', 'base.html-tpl')
 
+    return app_name
 
-def create_mvc_structure(app_name: str, orm: str = None) -> None:
+
+def create_mvc_structure(app_name: str, orm: str = None) -> list[str]:
     app_name = _to_snake_case(string=app_name)
     os.mkdir(app_name)
     paths = ['blueprints', 'cli', 'forms', 'models', 'tasks']
@@ -41,6 +43,8 @@ def create_mvc_structure(app_name: str, orm: str = None) -> None:
 
     _create_subdir(app_name, 'templates')
     create_templ_file(app_name, 'templates', 'base.html-tpl')
+
+    return [app_name, paths]
 
 
 def generate_blueprint_pkg(name: str, app_name: str, template: str, **context: Any) -> None:
