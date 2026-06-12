@@ -1,6 +1,6 @@
 [project]
 name = "Flask-Generate"
-version = "0.1.0"
+version = "0.1.1"
 description = "Scaffolding generator for the Flask framework."
 authors = [
     { name = "Brandon Arreguin", email = "arreguin.tech@gmail.com" }
@@ -23,6 +23,9 @@ packages = [{ include = "flask_generate", from = "src" }]
 
 [project.scripts]
 flask-generate = "flask_generate.main:execute"
+
+[project.urls]
+Source = "https://github.com/itsarreguin/flask-generate"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

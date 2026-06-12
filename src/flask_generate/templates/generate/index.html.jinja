@@ -16,7 +16,7 @@
       height="60px"
     >
   </header>
-  <main class="w-full h-screen" style="position:relative; display:flex; align-items:center;">
+  <main class="main-container" style="position:relative; display:flex; align-items:center;">
     <div class="card-container">
     {% for obj in object_list %}
       <a class="card" href="{{ obj.link }}" target="_blank">
@@ -37,13 +37,11 @@
             Python Version: <p class="text-aqua" style="margin-left: 4px;">{{ py_version }}</p>
           </span>
         </div>
-        <span class="footer-line-vertical flex"></span>
         <div class="w-full flex" style="padding: 15px 15px; justify-content:center;">
           <a class="text-white" href="https://www.palletsprojects.com/" target="_blank">
             Pallets Projects
           </a>
         </div>
-        <span class="footer-line-vertical flex"></span>
         <div class="w-full flex" style="padding: 15px 15px; justify-content:center;">
           <span class="text-white flex">
             Flask Version: <p class="text-aqua" style="margin-left: 4px;">{{ flask_version }}</p>
